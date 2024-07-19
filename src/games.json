@@ -1,0 +1,16 @@
+[  
+  {
+    "id": "test-game",
+    "name": "Test Game",
+    "scriptUrl": "/test-game.js",
+    "cssUrl": "/test-game.css",
+    "assetsUrl": "/test-assets"
+  },
+  {
+    "id": "whack-a-mole",
+    "name": "Whack a Mole",
+    "scriptUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/src/whack_a_mole.js",
+    "cssUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/src/whack_a_mole.css",
+    "assetsUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/asset"
+  }
+]

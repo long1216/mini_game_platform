@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import GameLoader from './GameLoader';
 
+// Import the local JSON file
+import gamesData from './games.json';
+
 const App = () => {
   const [games, setGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
 
   useEffect(() => {
-    // Fetch list of available games from your API
-    fetchGames().then(setGames);
+    // Set the games from the local JSON file
+    setGames(gamesData);
   }, []);
 
-  const loadGame = async (gameId) => {
+  const loadGame = (gameId) => {
     setSelectedGame(gameId);
   };
 
@@ -24,7 +27,7 @@ const App = () => {
           </button>
         ))}
       </div>
-      {selectedGame && <GameLoader gameId={selectedGame} />}
+      {selectedGame && <GameLoader gameData={games.find(game => game.id === selectedGame)} />}
     </div>
   );
 };

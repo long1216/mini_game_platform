@@ -1,45 +1,74 @@
 import React, { useState, useEffect } from 'react';
 
-const GameLoader = ({ gameId }) => {
+const GameLoader = ({ gameData }) => {
   const [gameComponent, setGameComponent] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadGame = async () => {
       try {
-        // Fetch game metadata from your API
-        const gameData = await fetchGameMetadata(gameId);
+        console.log('Attempting to load game:', gameData.id);
+        
+        // Fetch the game script
+        const scriptResponse = await fetch(gameData.scriptUrl);
+        if (!scriptResponse.ok) {
+          throw new Error(`Failed to fetch script: ${scriptResponse.statusText}`);
+        }
+        const scriptContent = await scriptResponse.text();
+        
+        console.log('Fetched script content:', scriptContent);
 
-        // Fetch and execute the game script
-        const scriptContent = await fetch(gameData.scriptUrl).then(res => res.text());
+        // Create and execute script
         const scriptElement = document.createElement('script');
         scriptElement.text = scriptContent;
         document.body.appendChild(scriptElement);
 
+        console.log('Script appended to document body');
+
         // Fetch and add the CSS
-        const cssContent = await fetch(gameData.cssUrl).then(res => res.text());
+        const cssResponse = await fetch(gameData.cssUrl);
+        if (!cssResponse.ok) {
+          throw new Error(`Failed to fetch CSS: ${cssResponse.statusText}`);
+        }
+        const cssContent = await cssResponse.text();
         const styleElement = document.createElement('style');
         styleElement.textContent = cssContent;
         document.head.appendChild(styleElement);
 
-        // The script should define a global function to initialize the game
-        if (window.initGame) {
-          const GameComponent = window.initGame(gameData.assetsUrl);
-          setGameComponent(() => GameComponent);
+        console.log('CSS appended to document head');
+
+        // Check if the game initialization function exists
+        if (typeof window.initGame !== 'function') {
+          console.error('window.initGame is not a function. Current value:', window.initGame);
+          throw new Error('initGame function not found. Check if the script is correct and defines this function.');
         }
+
+        // Initialize the game, passing React as the first argument
+        console.log('Calling initGame function');
+        const GameComponent = window.initGame(React, gameData.assetsUrl);
+        setGameComponent(() => GameComponent);
+
+        console.log('Game component set successfully');
       } catch (error) {
         console.error('Failed to load game:', error);
+        setError(error.message);
       }
     };
 
-    loadGame();
+    if (gameData) {
+      loadGame();
+    }
 
     // Cleanup function
     return () => {
-      // Remove the added script and style elements when component unmounts
       document.querySelectorAll('script[data-game-script]').forEach(el => el.remove());
       document.querySelectorAll('style[data-game-style]').forEach(el => el.remove());
     };
-  }, [gameId]);
+  }, [gameData]);
+
+  if (error) {
+    return <div>Error loading game: {error}</div>;
+  }
 
   return gameComponent ? React.createElement(gameComponent) : <div>Loading game...</div>;
 };
