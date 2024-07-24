@@ -4,13 +4,28 @@
     "name": "Test Game",
     "scriptUrl": "/test-game.js",
     "cssUrl": "/test-game.css",
-    "assetsUrl": "/test-assets"
+    "assetsUrl": "/test-assets",
+    "is3D": false
   },
   {
     "id": "whack-a-mole",
     "name": "Whack a Mole",
     "scriptUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/src/whack_a_mole.js",
     "cssUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/src/whack_a_mole.css",
-    "assetsUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/asset"
+    "assetsUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_react/main/asset",
+    "is3D": false
+  },
+  {
+    "id": "rotating-cube",
+    "name": "Rotating Cube",
+    "scriptUrl": "/games/rotating-cube.js",
+    "is3D": true
+  },
+  {
+    "id": "whack-a-mole-3d",
+    "name": "3D Whack-a-Mole",
+    "scriptUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_3d/main/src/whack_a_mole_3d.js",
+    "assetsUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_3d/main/asset",
+    "is3D": true
   }
 ]
