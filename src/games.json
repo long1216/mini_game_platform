@@ -27,5 +27,20 @@
     "scriptUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_3d/main/src/whack_a_mole_3d.js",
     "assetsUrl": "https://raw.githubusercontent.com/long1216/whack_a_mole_3d/main/asset",
     "is3D": true
+  },
+  {
+    "id": "puzzle-game",
+    "name": "Puzzle Game",
+    "scriptUrl": "https://raw.githubusercontent.com/blackcat5328/Puzzle-Game/main/src/whack_a_mole.js",
+    "cssUrl": "https://raw.githubusercontent.com/blackcat5328/Puzzle-Game/main/src/whack_a_mole.css",
+    "assetsUrl": "https://raw.githubusercontent.com/blackcat5328/Puzzle-Game/main/asset",
+    "is3D": false
+  },
+  {
+    "id": "3D Matching",
+    "name": "3D Matching",
+    "scriptUrl": "https://raw.githubusercontent.com/blackcat5328/Matching_card/main/src/matching_card_3d.js",
+    "assetsUrl": "https://raw.githubusercontent.com/blackcat5328/Matching_card//main/asset",
+    "is3D": true
   }
 ]
